@@ -45,8 +45,8 @@ A Streamlit-powered natural language interface that lets users query banking dat
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/banking-chat-agent.git
-cd banking-chat-agent
+git clone https://github.com/bmshambu/nbfc_agent.git
+cd nbfc_agent
 ```
 
 ### 2. Create a virtual environment (optional but recommended)
