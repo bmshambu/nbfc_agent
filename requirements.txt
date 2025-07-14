@@ -6,3 +6,4 @@ pandas
 openpyxl
 langchain_groq
 langchain_experimental
+langchain_google_genai
