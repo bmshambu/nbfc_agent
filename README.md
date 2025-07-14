@@ -89,7 +89,7 @@ Columns:
 - Locker No.
 ```
 
-*Note: See full schema in `app.py`*
+*Note: See full schema in `streamlit_app.py`*
 
 ---
 
