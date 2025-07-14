@@ -1,0 +1,8 @@
+streamlit
+langchain_openai
+langgraph
+langchain_core
+pandas
+openpyxl
+langchain_groq
+langchain_experimental
