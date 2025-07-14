@@ -1,34 +1,30 @@
-from langchain_experimental.agents import create_pandas_dataframe_agent
+from langchain_groq import ChatGroq
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+import os
+import sqlparse
 import pandas as pd
-# from groq_llm_handler import initialize_llm
-from google_llm_handler import initialize_llm
+import sqlite3
+from constants.sys_prompt import prompt
+from groq_llm_handler import initialize_llm
 
-llm = initialize_llm()
-file_path = "ManagementReports-LoanDueList.xlsx"
-df = pd.read_excel(file_path)
+df=pd.read_excel("ManagementReports-LoanDueList.xlsx",header=1)
 
-def analyze_excel_with_agent(query, llm, verbose=True):
+def text_to_sql():
     """
-    Reads an Excel file, creates a pandas dataframe agent using the given LLM,
-    and runs a natural language query on the data.
+    Converts a natural language query to an SQL query using a language model.
 
     Parameters:
-        file_path (str): Path to the Excel file.
-        query (str): Natural language query to ask about the data.
-        llm: A language model instance (like OpenAI's LLM).
-        verbose (bool): Whether to display verbose output.
+        df (pd.DataFrame): The DataFrame containing the data schema.
 
     Returns:
-        The result of the query from the agent.
+        str: The generated SQL query.
     """
 
-    agent = create_pandas_dataframe_agent(llm, df,
-                                        agent_type="tool-calling",
-                                        include_df_in_prompt=True,
-                                        number_of_head_rows=2,
-                                        verbose=verbose,allow_dangerous_code=True)
-    response = agent.invoke(query)
-    print (f"Response: {response}")
-    # For demonstration purposes, we return a mock response
-    #response ='There are 891 rows in the dataframe.'
-    return response
+    conn = sqlite3.connect("loan_data.db")
+    df.to_sql("LoanDueDetails", conn, index=False, if_exists='replace')
+    prompt_template=PromptTemplate.from_template(prompt)
+    #Initialize the Groq LLM
+    llm=initialize_llm()
+    text_to_sql_chain=LLMChain(llm=llm,prompt=prompt_template)
+    return text_to_sql_chain
