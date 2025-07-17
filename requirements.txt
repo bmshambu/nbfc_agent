@@ -7,5 +7,5 @@ openpyxl
 langchain_groq
 langchain_experimental
 langchain_google_genai
-sqlite3
 tabulate
+sqlparse
