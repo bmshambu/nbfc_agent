@@ -44,7 +44,7 @@ if st.button("Submit") and question.strip():
                 if response:
                     st.success("✅ Extracted Answer:")
                     st.markdown(f"💬 Answer: {response}")
-                    st.markdown("SQL Query Executed:")
+                    st.markdown("👨‍💻 SQL Query Executed:")
                     st.code(sql_query.strip(), language='sql')
                 else:
                     st.error(f"❌ Something Went wrong")
