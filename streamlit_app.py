@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import json
 from constants import schema
-from main_groq import text_to_sql
+from main import text_to_sql
 from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
